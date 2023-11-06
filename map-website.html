@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>MapBerlin</title>
+  <link rel="stylesheet" type="text/css" href="Style.css">
+
+
+</head>
+<body>
+<hr>
+
+<section id="login">
+  <h1>Mapberlin</h1>
+  <form>
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+
+    <button type="submit">Login</button>
+  </form>
+</section>
+<hr>
+
+
+<section id="main">
+  <h2>Welcome to our MapBerlin</h2>
+  <div id="locations" >
+    <h3>Locations</h3>
+    <div style="display: flex">
+    <ul style="margin-right:20% ">
+      <li><a href="location1.html">location 1</a></li>
+      <li><a href="location2.html">location 2</a></li>
+      <li><a href="location3.html">location 3</a></li>
+    </ul>
+
+
+
+
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d155334.94242620296!2d13.307783402588756!3d52.53147151378826!2m3!1f0!2f0!3f0!3m2!
+    1i1024!2i768!4f13.1!3m3!1m2!1s0x47a8504a11871499%3A0x4e2c0fa9b9d621ec!2sA%20100%2C%20Berlin!5e0!3m2!1sen!2sde!4v1698154289868!5m2!1sen!2sde"
+            width="400" height="400" style="border:0;"
+            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" ></iframe>
+    </div>
+    <button id="addBtn">Add</button>
+    <button id="logoutBtn">Logout</button>
+  </div>
+
+
+
+
+
+
+  <footer>
+    <p>Impressum | Datenschutzerklärung</p>
+  </footer>
+</section>
+
+<hr>
+
+
+<section id="add">
+  <h2>Add Location</h2>
+  <form onsubmit="return validateAddForm()">
+    <label for="locationName">Name *</label>
+    <input type="text" id="locationName" name="locationName" required>
+
+    <label for="locationDescription">Description </label>
+    <input id="locationDescription" name="locationDescription">
+
+    <label for="locationStreet">Street *</label>
+    <input type="text" id="locationStreet" name="locationStreet" required>
+
+    <label for="locationZip">Zip *</label>
+    <input type="text" id="locationZip" name="locationZip" required>
+
+    <label for="locationCity">City *</label>
+    <input type="text" id="locationCity" name="locationCity" required>
+
+    <label for="locationState">State: Berlin or Brandenburg *</label>
+    <select id="locationState" name="locationState" required>
+      <option value="Berlin">Berlin</option>
+      <option value="Brandenburg">Brandenburg</option>
+    </select>
+
+    <label for="locationLat">Lat</label>
+    <input type="text" id="locationLat" name="locationLat">
+
+    <label for="locationLon">Lon</label>
+    <input type="text" id="locationLon" name="locationLon">
+
+    <button type="submit">Save/Submit</button>
+    <button type="button" onclick="cancelAdd()">Cancel</button>
+  </form>
+</section>
+<hr>
+
+<section id="updateDelete">
+  <h2>Update/Delete Location</h2>
+  <form onsubmit="return validateUpdateDeleteForm()">
+    <label for="updateLocationName">Name *</label>
+    <input type="text" id="updateLocationName" name="updateLocationName"  required>
+
+    <label for="updateLocationDescription">Description</label>
+    <textarea id="updateLocationDescription" name="updateLocationDescription"></textarea>
+
+    <label for="updateLocationStreet">Street *</label>
+    <input type="text" id="updateLocationStreet" name="updateLocationStreet"  required>
+
+    <label for="updateLocationZip">Zip *</label>
+    <input type="text" id="updateLocationZip" name="updateLocationZip" required>
+
+    <label for="updateLocationCity">City *</label>
+    <input type="text" id="updateLocationCity" name="updateLocationCity" required>
+
+    <label for="updateLocationState">State: Berlin or Brandenburg *</label>
+    <select id="updateLocationState" name="updateLocationState" required>
+      <option value="Berlin" selected>Berlin</option>
+      <option value="Brandenburg">Brandenburg</option>
+    </select>
+
+    <label for="updateLocationLat">Lat</label>
+    <input type="text" id="updateLocationLat" name="updateLocationLat" >
+
+    <label for="updateLocationLon">Lon</label>
+    <input type="text" id="updateLocationLon" name="updateLocationLon" >
+
+    <button type="submit">Update</button>
+    <button type="button" onclick="deleteLocation()">Delete</button>
+    <button type="button" onclick="cancelUpdateDelete()">Cancel</button>
+  </form>
+</section>
+
+
+
+
+</body>
+</html>
