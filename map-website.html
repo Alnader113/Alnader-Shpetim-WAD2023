@@ -4,15 +4,16 @@
   <meta charset="UTF-8">
   <title>MapBerlin</title>
   <link rel="stylesheet" type="text/css" href="Style.css">
+  <script src="JSCode.js"></script>
 
 
 </head>
 <body>
-<hr>
+
 
 <section id="login">
   <h1>Mapberlin</h1>
-  <form>
+  <form onsubmit="login(); return false;">
     <label for="username">Username:</label>
     <input type="text" id="username" name="username" required>
 
@@ -21,47 +22,64 @@
 
     <button type="submit">Login</button>
   </form>
+  <footer>
+    <p>Impressum | Datenschutzerklärung</p>
+  </footer>
 </section>
-<hr>
 
 
-<section id="main">
-  <h2>Welcome to our MapBerlin</h2>
+
+<section id="mainAdmina" style="display: none;">
+  <h2>Welcome to our MapBerlin, Admin!</h2>
   <div id="locations" >
     <h3>Locations</h3>
     <div style="display: flex">
     <ul style="margin-right:20% ">
-      <li><a href="location1.html">location 1</a></li>
-      <li><a href="location2.html">location 2</a></li>
-      <li><a href="location3.html">location 3</a></li>
+      <li><a href="#" onclick="showUpdateDelete('location1')">Location 1</a></li>
+      <li><a href="#" onclick="showUpdateDelete('location2')">Location 2</a></li>
+      <li><a href="#" onclick="showUpdateDelete('location3')">Location 3</a></li>
     </ul>
-
-
-
-
     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d155334.94242620296!2d13.307783402588756!3d52.53147151378826!2m3!1f0!2f0!3f0!3m2!
     1i1024!2i768!4f13.1!3m3!1m2!1s0x47a8504a11871499%3A0x4e2c0fa9b9d621ec!2sA%20100%2C%20Berlin!5e0!3m2!1sen!2sde!4v1698154289868!5m2!1sen!2sde"
             width="400" height="400" style="border:0;"
             allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" ></iframe>
     </div>
-    <button id="addBtn">Add</button>
-    <button id="logoutBtn">Logout</button>
+    <button id="addBtn1" onclick="openAddLocation()">Add</button>
+    <button onclick="logout()" >Logout</button>
   </div>
-
-
-
-
-
 
   <footer>
     <p>Impressum | Datenschutzerklärung</p>
   </footer>
 </section>
 
-<hr>
+
+<section id="mainNormal" style="display: none;">
+  <h2>Welcome to our MapBerlin, Normalo</h2>
+  <div id="locations1" >
+    <h3>Locations</h3>
+    <div style="display: flex">
+      <ul style="margin-right:20% ">
+        <li ><button onclick="showUpdateDelete('hermannplatz')">hermannplatz</button></li>
+        <li><a href="#" onclick="showUpdateDelete('location2')">Location 2</a></li>
+        <li><a href="#" onclick="showUpdateDelete('location3')">Location 3</a></li>
+      </ul>
+      <iframe id="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d155334.94242620296!2d13.307783402588756!3d52.53147151378826!2m3!1f0!2f0!3f0!3m2!
+    1i1024!2i768!4f13.1!3m3!1m2!1s0x47a8504a11871499%3A0x4e2c0fa9b9d621ec!2sA%20100%2C%20Berlin!5e0!3m2!1sen!2sde!4v1698154289868!5m2!1sen!2sde"
+              width="400" height="400" style="border:0;"
+              allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" ></iframe>
+    </div>
+    <button onclick="logout()" >Logout</button>
+  </div>
+
+  <footer>
+    <p>Impressum | Datenschutzerklärung</p>
+  </footer>
+</section>
 
 
-<section id="add">
+
+<section id="add" style="display: none;">
   <h2>Add Location</h2>
   <form onsubmit="return validateAddForm()">
     <label for="locationName">Name *</label>
@@ -91,11 +109,14 @@
     <label for="locationLon">Lon</label>
     <input type="text" id="locationLon" name="locationLon">
 
-    <button type="submit">Save/Submit</button>
+    <button type="submit" onclick="getCoordinatesFromAddress()">Save/Submit</button>
     <button type="button" onclick="cancelAdd()">Cancel</button>
   </form>
+  <footer>
+    <p>Impressum | Datenschutzerklärung</p>
+  </footer>
 </section>
-<hr>
+
 
 <section id="updateDelete">
   <h2>Update/Delete Location</h2>
@@ -127,10 +148,13 @@
     <label for="updateLocationLon">Lon</label>
     <input type="text" id="updateLocationLon" name="updateLocationLon" >
 
-    <button type="submit">Update</button>
-    <button type="button" onclick="deleteLocation()">Delete</button>
+    <button id="updateBtn" onclick="updateLocation()" type="submit">Update</button>
+    <button id="deleteBtn" type="button" onclick="deleteLocation()">Delete</button>
     <button type="button" onclick="cancelUpdateDelete()">Cancel</button>
   </form>
+  <footer>
+    <p>Impressum | Datenschutzerklärung</p>
+  </footer>
 </section>
 
 
