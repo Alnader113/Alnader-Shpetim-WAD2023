@@ -116,7 +116,7 @@ function showUpdateDelete(location, locationData1) {
 
 
 
-function showAdminMain() {
+/*function showAdminMain() {
     document.getElementById('login').style.display = 'none';
     document.getElementById('mainAdmina').style.display = 'block';
     const locations = JSON.parse(localStorage.getItem('locations'))
@@ -125,7 +125,7 @@ function showAdminMain() {
         locations.forEach(location => {
             const liElement = document.createElement('li');
             const aElement = document.createElement('a');
-            aElement.innerHTML = location.city + ' - '+ location.street ;
+            aElement.innerHTML = location.street ;
             aElement.href = '#'
             aElement.onclick = ev => {
                 showUpdateDelete(location.city, location)
@@ -135,7 +135,33 @@ function showAdminMain() {
         })
 
     }
+}*/
+
+
+function showAdminMain() {
+    document.getElementById('login').style.display = 'none';
+    document.getElementById('mainAdmina').style.display = 'block';
+    const locations = JSON.parse(localStorage.getItem('locations'))
+    const locationLinks = document.getElementById('locationLinks');
+
+    if (locationLinks && locations && locations.length > 0){
+        locations.forEach(location => {
+            const linkExists = Array.from(locationLinks.getElementsByTagName('a')).some(link => link.textContent === location.street);
+            if (!linkExists) {
+                const liElement = document.createElement('li');
+                const aElement = document.createElement('a');
+                aElement.innerHTML = location.street ;
+                aElement.href = '#'
+                aElement.onclick = ev => {
+                    showUpdateDelete(location.city, location)
+                }
+                liElement.appendChild(aElement);
+                locationLinks.appendChild(liElement);
+            }
+        })
+    }
 }
+
 
 function showNormalMain() {
     document.getElementById('login').style.display = 'none';
