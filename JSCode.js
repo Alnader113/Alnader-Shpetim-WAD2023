@@ -74,9 +74,9 @@ function showUpdateDelete(location, locationData1) {
         lat: 52.5071378,
         lon: 13.331868
     }
-    document.getElementById('mainAdmina').style.display = 'none'; // Verstecke den aktuellen Hauptbildschirm
-    document.getElementById('mainNormal').style.display = 'none'; // Verstecke den aktuellen Hauptbildschirm
-    document.getElementById('updateDelete').style.display = 'block'; // Zeige die updateDelete-Seite an
+    document.getElementById('mainAdmina').style.display = 'none';
+    document.getElementById('mainNormal').style.display = 'none';
+    document.getElementById('updateDelete').style.display = 'block';
     const isAdmin = JSON.parse(localStorage.getItem('isAdmin'))
     if(!isAdmin) {
         console.log(isAdmin)
@@ -85,7 +85,7 @@ function showUpdateDelete(location, locationData1) {
     }
     const lng = '13.421498314'
     const lat = '52.485664724'
-   // document.getElementById('map').src = 'https://maps.google.com/maps?q=' + lat + ',' + lng + '&t=&z=15&ie=UTF8&iwloc=&output=embed'
+
 
     let locationData = null;
     switch (location) {
@@ -113,30 +113,6 @@ function showUpdateDelete(location, locationData1) {
         document.getElementById('updateLocationLon').value = locationData.lon;
     }
 }
-
-
-
-/*function showAdminMain() {
-    document.getElementById('login').style.display = 'none';
-    document.getElementById('mainAdmina').style.display = 'block';
-    const locations = JSON.parse(localStorage.getItem('locations'))
-    const locationLinks = document.getElementById('locationLinks');
-    if (locationLinks && locations && locations.length > 0){
-        locations.forEach(location => {
-            const liElement = document.createElement('li');
-            const aElement = document.createElement('a');
-            aElement.innerHTML = location.street ;
-            aElement.href = '#'
-            aElement.onclick = ev => {
-                showUpdateDelete(location.city, location)
-            }
-            liElement.appendChild(aElement);
-            locationLinks.appendChild(liElement);
-        })
-
-    }
-}*/
-
 
 function showAdminMain() {
     document.getElementById('login').style.display = 'none';
