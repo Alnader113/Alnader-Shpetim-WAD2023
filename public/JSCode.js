@@ -4,42 +4,71 @@ function showLogin() {
     document.getElementById('add').style.display = 'none';
     document.getElementById('updateDelete').style.display = 'none';
     document.querySelector('footer').style.display = 'none';
+
 }
 
 // Zeige standardmäßig die Login-Seite
 showLogin();
 
 
-const admina = { username: "admina", password: "password", role: "admin" };
-const normalo = { username: "normalo", password: "password", role: "non-admin" };
+//const admina = { username: "admina", password: "password", role: "admin" };
+//const normalo = { username: "normalo", password: "password", role: "non-admin" };
 var currentUser = {
     username : '',
     password : ''
 
 
 };
+/*
+function loginUser(username, password) {
+    // Überprüfe, ob der Benutzer existiert und das Passwort korrekt ist
+    if (username === admina.username && password === admina.password) {
+        currentUser = admina; // Setze den eingeloggten Benutzer als admina
+    } else if (username === normalo.username && password === normalo.password) {
+        currentUser = normalo; // Setze den eingeloggten Benutzer als normalo
+    } else {
+        currentUser = null; // Falsche Anmeldedaten
+    }
+    return currentUser;
+}*/
 
 function login() {
     var username = document.getElementById('username').value;
     var password = document.getElementById('password').value;
-    const isAdmin = username === 'admina' && password === 'password'
-    localStorage.setItem("isAdmin", isAdmin)
-
-
-    // Check für admina
-    if (username === 'admina' && password === 'password') {
-        showAdminMain()
-    }
-    // Check für normalo
-    else if (username === 'normalo' && password === 'password') {
-        showNormalMain();
-    }
-    // Falsche Kombination von username/passwort
-    else {
-        alert('Falsche Anmeldeinformationen.');
-    }
-
+    fetch("http://localhost:3000/users", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify({ username, password})
+    }).then(res =>{
+        res.json().then(user=>{
+            localStorage.setItem('isAdmin', user.role === 'admin')
+            localStorage.setItem('aktuellerNutzer', JSON.stringify(user))
+            if(res.ok) {
+                // Check für admina
+                if (user.role === 'admin') {
+                    showAdminMain()
+                }
+                // Check für normalo
+                else{
+                    showNormalMain();
+                }
+            }
+            // Falsche Kombination von username/passwort
+            else {
+                alert('Falsche Anmeldeinformationen.');
+            }
+        })
+    }).catch(console.log)
 }
+
+
+
+
+
+
+
 
 function showUpdateDelete(location, locationData1) {
     let hermannplatz = {
@@ -74,9 +103,9 @@ function showUpdateDelete(location, locationData1) {
         lat: 52.5071378,
         lon: 13.331868
     }
-    document.getElementById('mainAdmina').style.display = 'none';
-    document.getElementById('mainNormal').style.display = 'none';
-    document.getElementById('updateDelete').style.display = 'block';
+    document.getElementById('mainAdmina').style.display = 'none'; // Verstecke den aktuellen Hauptbildschirm
+    document.getElementById('mainNormal').style.display = 'none'; // Verstecke den aktuellen Hauptbildschirm
+    document.getElementById('updateDelete').style.display = 'block'; // Zeige die updateDelete-Seite an
     const isAdmin = JSON.parse(localStorage.getItem('isAdmin'))
     if(!isAdmin) {
         console.log(isAdmin)
@@ -85,7 +114,7 @@ function showUpdateDelete(location, locationData1) {
     }
     const lng = '13.421498314'
     const lat = '52.485664724'
-
+    // document.getElementById('map').src = 'https://maps.google.com/maps?q=' + lat + ',' + lng + '&t=&z=15&ie=UTF8&iwloc=&output=embed'
 
     let locationData = null;
     switch (location) {
@@ -114,30 +143,28 @@ function showUpdateDelete(location, locationData1) {
     }
 }
 
+
+
 function showAdminMain() {
     document.getElementById('login').style.display = 'none';
     document.getElementById('mainAdmina').style.display = 'block';
     const locations = JSON.parse(localStorage.getItem('locations'))
     const locationLinks = document.getElementById('locationLinks');
-
     if (locationLinks && locations && locations.length > 0){
         locations.forEach(location => {
-            const linkExists = Array.from(locationLinks.getElementsByTagName('a')).some(link => link.textContent === location.street);
-            if (!linkExists) {
-                const liElement = document.createElement('li');
-                const aElement = document.createElement('a');
-                aElement.innerHTML = location.street ;
-                aElement.href = '#'
-                aElement.onclick = ev => {
-                    showUpdateDelete(location.city, location)
-                }
-                liElement.appendChild(aElement);
-                locationLinks.appendChild(liElement);
+            const liElement = document.createElement('li');
+            const aElement = document.createElement('a');
+            aElement.innerHTML = location.city + ' - '+ location.street ;
+            aElement.href = '#'
+            aElement.onclick = ev => {
+                showUpdateDelete(location.city, location)
             }
+            liElement.appendChild(aElement);
+            locationLinks.appendChild(liElement);
         })
+
     }
 }
-
 
 function showNormalMain() {
     document.getElementById('login').style.display = 'none';
@@ -250,4 +277,3 @@ async function validateAddForm() {
 
     showAdminMain();
 }
-
