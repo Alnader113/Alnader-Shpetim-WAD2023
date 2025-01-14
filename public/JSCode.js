@@ -7,7 +7,7 @@ function showLogin() {
 
 }
 
-// Zeige standardmäßig die Login-Seite
+
 showLogin();
 
 
@@ -19,18 +19,7 @@ var currentUser = {
 
 
 };
-/*
-function loginUser(username, password) {
-    // Überprüfe, ob der Benutzer existiert und das Passwort korrekt ist
-    if (username === admina.username && password === admina.password) {
-        currentUser = admina; // Setze den eingeloggten Benutzer als admina
-    } else if (username === normalo.username && password === normalo.password) {
-        currentUser = normalo; // Setze den eingeloggten Benutzer als normalo
-    } else {
-        currentUser = null; // Falsche Anmeldedaten
-    }
-    return currentUser;
-}*/
+
 
 function login() {
     var username = document.getElementById('username').value;
