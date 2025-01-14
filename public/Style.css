@@ -1,312 +1,311 @@
 /* CSS für den Abschnitt "login" */
 #login {
-    background-color: #f2f2f2; /* Hintergrundfarbe */
-    padding: 20px; /* Innenabstand */
-    text-align: center; /* Textausrichtung */
+    background-color: #f2f2f2; 
+    padding: 20px; 
+    text-align: center; 
     max-width: 600px;
     margin: 0 auto;
 
-    /* Schatten für den Abschnitt */
+    
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    border-radius: 5px; /* Abgerundete Ecken */
+    border-radius: 5px; 
 }
 
-/* CSS für den Titel "Mapberlin" */
+
 #login h1 {
-    font-size: 24px; /* Schriftgröße */
-    font-weight: bold; /* Fettschrift */
+    font-size: 24px; 
+    font-weight: bold; 
 }
 
-/* CSS für das Formular */
+
 #login form {
-    margin-top: 20px; /* Abstand zum Titel */
+    margin-top: 20px; 
 }
 
 /* CSS für die Labels */
 #login label {
-    display: block; /* Jedes Label auf einer neuen Zeile */
-    margin-top: 10px; /* Abstand zwischen den Labels */
-    font-weight: bold; /* Fettschrift für Labels */
+    display: block; 
+    margin-top: 10px; 
+    font-weight: bold; 
 }
 
 /* CSS für die Eingabefelder */
 #login input {
-    width: 30%; /* Volle Breite der Container */
-    padding: 8px; /* Innenabstand */
-    margin-top: 5px; /* Abstand zwischen den Eingabefeldern */
-    border: 1px solid #ccc; /* Rand um die Eingabefelder */
-    border-radius: 4px; /* Abgerundete Ecken */
+    width: 30%; 
+    padding: 8px; 
+    margin-top: 5px; 
+    border: 1px solid #ccc; 
+    border-radius: 4px; 
 }
 
-/* CSS für den Login-Button */
+
 #login button {
-    background-color: #0074d9; /* Hintergrundfarbe */
-    color: #fff; /* Textfarbe */
-    padding: 10px 20px; /* Innenabstand */
-    border: none; /* Kein Rand */
-    border-radius: 4px; /* Abgerundete Ecken */
-    cursor: pointer; /* Zeiger beim Überfahren des Buttons */
-    margin-top: 15px; /* Abstand zum letzten Eingabefeld */
+    background-color: #0074d9; 
+    color: #fff;
+    padding: 10px 20px; 
+    border: none; 
+    border-radius: 4px;
+    cursor: pointer; 
+    margin-top: 15px; 
 }
 
-/* CSS für den Login-Button beim Überfahren mit der Maus */
+
 #login button:hover {
-    background-color: #0056b3; /* Hintergrundfarbe beim Überfahren */
+    background-color: #0056b3; 
 }
 
-/* CSS für den Abschnitt "main" */
+
 #mainAdmina {
-    background-color: #f2f2f2; /* Hintergrundfarbe */
-    padding: 20px; /* Innenabstand */
-    text-align: left; /* Textausrichtung */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Schatten */
-    border-radius: 5px; /* Abgerundete Ecken */
+    background-color: #f2f2f2; 
+    padding: 20px;
+    text-align: left; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
+    border-radius: 5px; 
     max-width: 600px;
-    margin: 0 auto; /* Zentriert den Abschnitt horizontal */
+    margin: 0 auto; 
 
 }
 
-/* CSS für den Titel "Willkommen-Nachricht an die User-Person" */
+
 #mainAdmina h2 {
-    font-size: 24px; /* Schriftgröße */
-    font-weight: bold; /* Fettschrift */
-    margin-top: 0; /* Entfernt den oberen Abstand */
+    font-size: 24px; 
+    font-weight: bold; 
+    margin-top: 0; 
 }
 
-/* CSS für den Abschnitt "main" */
+
 #mainNormal {
-    background-color: #f2f2f2; /* Hintergrundfarbe */
-    padding: 20px; /* Innenabstand */
-    text-align: left; /* Textausrichtung */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Schatten */
-    border-radius: 5px; /* Abgerundete Ecken */
+    background-color: #f2f2f2; 
+    padding: 20px; 
+    text-align: left;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
+    border-radius: 5px; 
     max-width: 600px;
-    margin: 0 auto; /* Zentriert den Abschnitt horizontal */
+    margin: 0 auto; 
 
 }
 
-/* CSS für den Titel "Willkommen-Nachricht an die User-Person" */
+
 #mainNormal h2 {
-    font-size: 24px; /* Schriftgröße */
-    font-weight: bold; /* Fettschrift */
-    margin-top: 0; /* Entfernt den oberen Abstand */
+    font-size: 24px; 
+    font-weight: bold; 
+    margin-top: 0; 
 }
 
-/* CSS für die Liste der Locations */
+
 #locations {
-    margin-top: 20px; /* Abstand zum Titel */
+    margin-top: 20px; 
     text-align: left;
 
 }
 
-/* CSS für die Liste der Locations (Unordered List) */
+
 #locations ul {
-    list-style-type: none; /* Entfernt die Listenpunkte */
+    list-style-type: none; 
     padding: 0;
 
 }
 
-/* CSS für die Location-Links */
+
 #locations a {
-    text-decoration: none; /* Entfernt die Standard-Link-Unterstreichung */
-    color: #0074d9; /* Textfarbe der Links */
+    text-decoration: none; 
+    color: #0074d9; 
     font-weight: bold;
 }
 
-/* CSS für die Location-Links beim Überfahren mit der Maus */
+
 #locations a:hover {
-    color: #0056b3; /* Textfarbe der Links beim Überfahren */
+    color: #0056b3; 
 }
 
-/* CSS für die Liste der Locations */
+
 #locations1 {
-    margin-top: 20px; /* Abstand zum Titel */
+    margin-top: 20px; 
     text-align: left;
 
 }
 
-/* CSS für die Liste der Locations (Unordered List) */
+
 #locations1 ul {
-    list-style-type: none; /* Entfernt die Listenpunkte */
+    list-style-type: none; 
     padding: 0;
 
 }
 
-/* CSS für die Location-Links */
+
 #locations1 a {
-    text-decoration: none; /* Entfernt die Standard-Link-Unterstreichung */
-    color: #0074d9; /* Textfarbe der Links */
+    text-decoration: none; 
+    color: #0074d9;
     font-weight: bold;
 }
 
-/* CSS für die Location-Links beim Überfahren mit der Maus */
+
 #locations1 a:hover {
-    color: #0056b3; /* Textfarbe der Links beim Überfahren */
+    color: #0056b3; 
 }
 
-/* CSS für die Footer-Informationen */
+
 footer {
-    margin-top: 20px; /* Abstand zum letzten Element */
-    font-size: 14px; /* Schriftgröße für den Footer-Text */
-    color: #666; /* Textfarbe */
+    margin-top: 20px; 
+    font-size: 14px; 
+    color: #666; 
 }
 
-/* CSS für die Footer-Links */
+
 footer a {
-    text-decoration: none; /* Entfernt die Standard-Link-Unterstreichung */
-    color: #0074d9; /* Textfarbe der Links im Footer */
+    text-decoration: none; 
+    color: #0074d9;
     font-weight: bold;
 }
 
-/* CSS für die Footer-Links beim Überfahren mit der Maus */
+
 footer a:hover {
-    color: #0056b3; /* Textfarbe der Links im Footer beim Überfahren */
-}
+    color: #0056b3; 
 
-/* CSS für den Abschnitt "add" */
+
 #add {
-    background-color: #f2f2f2; /* Hintergrundfarbe */
-    padding: 20px; /* Innenabstand */
-    text-align: center; /* Textausrichtung */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Schatten */
-    border-radius: 5px; /* Abgerundete Ecken */
-    max-width: 600px; /* Maximale Breite des Abschnitts */
-    margin: 0 auto; /* Zentriert den Abschnitt horizontal */
+    background-color: #f2f2f2; 
+    padding: 20px; 
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
+    border-radius: 5px; 
+    max-width: 600px; 
+    margin: 0 auto; 
 }
 
-/* CSS für den Titel "Add Location" */
+
 #add h2 {
-    font-size: 24px; /* Schriftgröße */
-    font-weight: bold; /* Fettschrift */
-    margin-top: 0; /* Entfernt den oberen Abstand */
+    font-size: 24px; 
+    font-weight: bold; 
+    margin-top: 0; 
 }
 
-/* CSS für das Formular und Labels */
+
 #add form {
-    margin-top: 20px; /* Abstand zum Titel */
+    margin-top: 20px; 
 }
 
-/* CSS für die Labels */
+
 #add label {
-    display: block; /* Jedes Label auf einer neuen Zeile */
-    margin-top: 10px; /* Abstand zwischen den Labels */
-    font-weight: bold; /* Fettschrift für Labels */
+    display: block; 
+    margin-top: 10px; 
+    font-weight: bold; 
 }
 
-/* CSS für die Eingabefelder */
+
 #add input,
 #add select {
-    width: 100%; /* Volle Breite der Container */
-    padding: 8px; /* Innenabstand */
-    margin-top: 5px; /* Abstand zwischen den Eingabefeldern */
-    border: 1px solid #ccc; /* Rand um die Eingabefelder */
-    border-radius: 4px; /* Abgerundete Ecken */
+    width: 100%; 
+    padding: 8px; 
+    margin-top: 5px; 
+    border: 1px solid #ccc; 
+    border-radius: 4px; 
 }
 
-/* CSS für die Buttons */
+
 #add button {
-    background-color: #0074d9; /* Hintergrundfarbe */
-    color: #fff; /* Textfarbe */
-    padding: 10px 20px; /* Innenabstand */
-    border: none; /* Kein Rand */
-    border-radius: 4px; /* Abgerundete Ecken */
-    cursor: pointer; /* Zeiger beim Überfahren der Buttons */
-    margin-top: 15px; /* Abstand zwischen den Buttons */
+    background-color: #0074d9; 
+    color: #fff; 
+    padding: 10px 20px; 
+    border: none; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    margin-top: 15px; 
 }
 
-/* CSS für die Buttons beim Überfahren mit der Maus */
+
 #add button:hover {
-    background-color: #0056b3; /* Hintergrundfarbe beim Überfahren */
+    background-color: #0056b3; 
 }
 
-/* CSS für den "Cancel"-Button */
+
 #add button[type="button"] {
-    background-color: #ccc; /* Hintergrundfarbe */
-    color: #333; /* Textfarbe */
+    background-color: #ccc;
+    color: #333;
 }
 
-/* CSS für den "Cancel"-Button beim Überfahren mit der Maus */
+
 #add button[type="button"]:hover {
-    background-color: #999; /* Hintergrundfarbe beim Überfahren */
+    background-color: #999; 
 }
 
 
-/* CSS für den Abschnitt "updateDelete" */
+
 #updateDelete {
-    background-color: #f2f2f2; /* Hintergrundfarbe */
-    padding: 20px; /* Innenabstand */
-    text-align: center; /* Textausrichtung */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Schatten */
-    border-radius: 5px; /* Abgerundete Ecken */
-    max-width: 600px; /* Maximale Breite des Abschnitts */
-    margin: 0 auto; /* Zentriert den Abschnitt horizontal */
+    background-color: #f2f2f2; 
+    padding: 20px; 
+    text-align: center; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
+    border-radius: 5px; 
+    max-width: 600px; 
+    margin: 0 auto; 
 }
 
-/* CSS für den Titel "Update/Delete Location" */
+
 #updateDelete h2 {
-    font-size: 24px; /* Schriftgröße */
-    font-weight: bold; /* Fettschrift */
-    margin-top: 0; /* Entfernt den oberen Abstand */
+    font-size: 24px; 
+    font-weight: bold; 
+    margin-top: 0; 
 }
 
-/* CSS für das Formular und Labels */
+
 #updateDelete form {
-    margin-top: 20px; /* Abstand zum Titel */
+    margin-top: 20px; 
 }
 
-/* CSS für die Labels */
+
 #updateDelete label {
-    display: block; /* Jedes Label auf einer neuen Zeile */
-    margin-top: 10px; /* Abstand zwischen den Labels */
-    font-weight: bold; /* Fettschrift für Labels */
+    display: block;
+    margin-top: 10px; 
+    font-weight: bold; 
 }
 
-/* CSS für die Eingabefelder und Textarea */
+
 #updateDelete input,
 #updateDelete select,
 #updateDelete textarea {
-    width: 100%; /* Volle Breite der Container */
-    padding: 8px; /* Innenabstand */
-    margin-top: 5px; /* Abstand zwischen den Eingabefeldern */
-    border: 1px solid #ccc; /* Rand um die Eingabefelder */
-    border-radius: 4px; /* Abgerundete Ecken */
+    width: 100%;
+    padding: 8px; 
+    margin-top: 5px; 
+    border: 1px solid #ccc; 
+    border-radius: 4px; 
 }
 
-/* CSS für die Buttons */
+
 #updateDelete button {
-    background-color: #0074d9; /* Hintergrundfarbe */
-    color: #fff; /* Textfarbe */
-    padding: 10px 20px; /* Innenabstand */
-    border: none; /* Kein Rand */
-    border-radius: 4px; /* Abgerundete Ecken */
-    cursor: pointer; /* Zeiger beim Überfahren der Buttons */
-    margin-top: 15px; /* Abstand zwischen den Buttons */
+    background-color: #0074d9; 
+    color: #fff; 
+    padding: 10px 20px; 
+    border: none; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    margin-top: 15px; 
 }
 
-/* CSS für die Buttons beim Überfahren mit der Maus */
+
 #updateDelete button:hover {
-    background-color: #0056b3; /* Hintergrundfarbe beim Überfahren */
+    background-color: #0056b3; 
 }
 
-/* CSS für den "Delete"-Button */
+
 #updateDelete button[type="button"][onclick="deleteLocation"] {
-    background-color: #cc0000; /* Hintergrundfarbe für Löschen */
+    background-color: #cc0000; 
 }
 
-/* CSS für den "Delete"-Button beim Überfahren mit der Maus */
+
 #updateDelete button[type="button"][onclick="deleteLocation"]:hover {
-    background-color: #990000; /* Hintergrundfarbe beim Überfahren */
+    background-color: #990000; 
 }
 
-/* CSS für den "Cancel"-Button */
+
 #updateDelete button[type="button"][onclick="cancelUpdateDelete"] {
-    background-color: #ccc; /* Hintergrundfarbe */
-    color: #333; /* Textfarbe */
+    background-color: #ccc; 
+    color: #333;
 }
 
-/* CSS für den "Cancel"-Button beim Überfahren mit der Maus */
+
 #updateDelete button[type="button"][onclick="cancelUpdateDelete"]:hover {
-    background-color: #999; /* Hintergrundfarbe beim Überfahren */
+    background-color: #999; 
 }
 
 #main, #add, #updateDelete {
