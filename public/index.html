@@ -1,159 +1,389 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
   <meta charset="UTF-8">
   <title>MapBerlin</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
   <link rel="stylesheet" type="text/css" href="Style.css">
-  <script src="JSCode.js"></script>
-
-
 </head>
+
 <body>
+  <main>
+    <section id="login" class="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-400 via-emerald-500 to-teal-600">
+      <div class="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md transform transition-all duration-300 hover:scale-105">
+        <div class="text-center mb-8">
+          <h1 class="text-4xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mb-2">
+             MapBerlin
+          </h1>
+          <p class="text-gray-600">Willkommen zurück!</p>
+        </div>
+
+        <form onsubmit="login(event); return false;" class="space-y-6">
+          <div>
+            <label for="username" class="block text-sm font-medium text-gray-700 mb-2">
+              Benutzername
+            </label>
+            <input 
+              type="text" 
+              id="username" 
+              name="username" 
+              required
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200 outline-none"
+              placeholder="Gib deinen Benutzernamen ein">
+          </div>
+
+          <div>
+            <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
+              Passwort
+            </label>
+            <input 
+              type="password" 
+              id="password" 
+              name="password" 
+              required
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200 outline-none">
+          </div>
+
+          <button 
+            type="submit" 
+            class="w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold py-3 rounded-lg hover:from-green-600 hover:to-emerald-700 transform transition duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 shadow-lg">
+            Anmelden
+          </button>
+        </form>
+
+        <div class="mt-6 text-center text-sm text-gray-600">
+          <p>Demo-Accounts:</p>
+          <p class="text-xs mt-1">Admin: <span class="font-mono bg-green-50 text-green-700 px-2 py-1 rounded">admin/87654321</span></p>
+          <p class="text-xs">User: <span class="font-mono bg-green-50 text-green-700 px-2 py-1 rounded">normalo/12345678</span></p>
+        </div>
+      </div>
+    </section>
 
 
-<section id="login">
-  <h1>Mapberlin</h1>
-  <form onsubmit="login(); return false;">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" required>
+    <section id="main" class="min-h-screen bg-gradient-to-br from-green-400 via-emerald-500 to-teal-600 p-8" style="display: none;">
+      <div class="max-w-7xl mx-auto">
+        <div class="bg-green-200 rounded-lg shadow-md p-6 mb-6">
+          <h2 class="text-3xl font-bold text-center text-gray-800">
+            Welcome to MapBerlin 
+          </h2>
+        </div>
 
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required>
+        <div id="locations" class="bg-green-200 rounded-lg shadow-md p-6">
+          <h3 class="text-2xl font-bold text-gray-800 mb-6">Locations</h3>
 
-    <button type="submit">Login</button>
-  </form>
-  <footer>
+          <div class="flex gap-6 mb-6">
+            <div class="w-64 flex-shrink-0">
+              <ul id="locationLinks" class="space-y-2">
+              </ul>
+            </div>
+
+            <div id="map" class="flex-1 h-[500px] rounded-lg border-2 border-green-300 shadow-sm"></div>
+          </div>
+
+          <div class="flex gap-3">
+            <button 
+              id="addBtn" 
+              class="admin-only bg-gradient-to-r from-green-500 to-emerald-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-green-600 hover:to-emerald-700 transform transition hover:scale-105 shadow-md" 
+              onclick="openAddLocation()" 
+              style="display: none;">
+               Add Location
+            </button>
+            <button 
+              onclick="logout()" 
+              class="bg-gray-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-600 transform transition hover:scale-105 shadow-md">
+               Logout
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="add" class="min-h-screen bg-gradient-to-br from-green-400 via-emerald-500 to-teal-600 p-8 flex items-center justify-center" style="display: none;">
+      <div class="bg-green-200 rounded-2xl shadow-2xl p-8 w-full max-w-2xl">
+        <div class="text-center mb-8">
+          <h2 class="text-3xl font-bold text-gray-800 mb-2"> Add New Location</h2>
+          <p class="text-gray-600">Füge eine neue Location zur Karte hinzu</p>
+        </div>
+
+        <form onsubmit="validateAddForm(); return false;" class="space-y-5">
+          <div>
+            <label for="locationName" class="block text-sm font-medium text-gray-700 mb-2">
+              Name *
+            </label>
+            <input 
+              type="text" 
+              id="locationName" 
+              name="locationName" 
+              required
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200 outline-none"
+            >
+          </div>
+
+          <div>
+            <label for="locationDescription" class="block text-sm font-medium text-gray-700 mb-2">
+              Description
+            </label>
+            <textarea 
+              id="locationDescription" 
+              name="locationDescription"
+              rows="3"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200 outline-none resize-vertical"
+              placeholder="Beschreibung der Location..."></textarea>
+          </div>
+
+          <div>
+            <label for="locationStreet" class="block text-sm font-medium text-gray-700 mb-2">
+              Street *
+            </label>
+            <input 
+              type="text" 
+              id="locationStreet" 
+              name="locationStreet" 
+              required
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200 outline-none"
+              placeholder="Straßenname + Hausnummer">
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label for="locationZip" class="block text-sm font-medium text-gray-700 mb-2">
+                Zip *
+              </label>
+              <input 
+                type="text" 
+                id="locationZip" 
+                name="locationZip" 
+                required
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200 outline-none"
+                placeholder="10115">
+            </div>
+
+            <div>
+              <label for="locationCity" class="block text-sm font-medium text-gray-700 mb-2">
+                City *
+              </label>
+              <input 
+                type="text" 
+                id="locationCity" 
+                name="locationCity" 
+                required
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200 outline-none"
+                placeholder="Berlin">
+            </div>
+          </div>
+
+          <div>
+            <label for="locationState" class="block text-sm font-medium text-gray-700 mb-2">
+              State *
+            </label>
+            <select 
+              id="locationState" 
+              name="locationState" 
+              required
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200 outline-none bg-white">
+              <option value="Berlin">Berlin</option>
+              <option value="Brandenburg">Brandenburg</option>
+            </select>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label for="locationLat" class="block text-sm font-medium text-gray-700 mb-2">
+                Latitude
+              </label>
+              <input 
+                type="text" 
+                id="locationLat" 
+                name="locationLat" 
+                readonly
+                class="w-full px-4 py-3 border border-gray-200 rounded-lg bg-gray-50 text-gray-600 cursor-not-allowed"
+                placeholder="Wird automatisch ermittelt">
+            </div>
+
+            <div>
+              <label for="locationLon" class="block text-sm font-medium text-gray-700 mb-2">
+                Longitude
+              </label>
+              <input 
+                type="text" 
+                id="locationLon" 
+                name="locationLon" 
+                readonly
+                class="w-full px-4 py-3 border border-gray-200 rounded-lg bg-gray-50 text-gray-600 cursor-not-allowed"
+                placeholder="Wird automatisch ermittelt">
+            </div>
+          </div>
+
+          <div class="flex gap-3 pt-4">
+            <button 
+              type="submit" 
+              class="flex-1 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold py-3 rounded-lg hover:from-green-600 hover:to-emerald-700 transform transition duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 shadow-lg">
+               Save Location
+            </button>
+            <button 
+              type="button" 
+              onclick="cancelAdd()" 
+              class="flex-1 bg-gray-500 text-white font-semibold py-3 rounded-lg hover:bg-gray-600 transform transition duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 shadow-lg">
+               Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section id="updateDelete" class="min-h-screen bg-gradient-to-br from-green-400 via-emerald-500 to-teal-600 p-8 flex items-center justify-center" style="display:none;">
+      <div class="bg-green-200 rounded-2xl shadow-2xl p-8 w-full max-w-2xl">
+        <div class="text-center mb-8">
+          <h2 class="text-3xl font-bold text-gray-800 mb-2"> Location Details</h2>
+          <p class="text-gray-600">Bearbeite oder lösche diese Location</p>
+        </div>
+
+        <form id="updateDeleteForm" class="space-y-5">
+          <div>
+            <label for="updateLocationName" class="block text-sm font-medium text-gray-700 mb-2">
+              Name *
+            </label>
+            <input 
+              type="text" 
+              id="updateLocationName" 
+              name="updateLocationName" 
+              required
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200 outline-none">
+          </div>
+
+          <div>
+            <label for="updateLocationDescription" class="block text-sm font-medium text-gray-700 mb-2">
+              Description
+            </label>
+            <textarea 
+              id="updateLocationDescription" 
+              name="updateLocationDescription"
+              rows="3"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200 outline-none resize-vertical"></textarea>
+          </div>
+
+          <div>
+            <label for="updateLocationStreet" class="block text-sm font-medium text-gray-700 mb-2">
+              Street *
+            </label>
+            <input 
+              type="text" 
+              id="updateLocationStreet" 
+              name="updateLocationStreet" 
+              required
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200 outline-none">
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label for="updateLocationZip" class="block text-sm font-medium text-gray-700 mb-2">
+                Zip *
+              </label>
+              <input 
+                type="text" 
+                id="updateLocationZip" 
+                name="updateLocationZip" 
+                required
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200 outline-none">
+            </div>
+
+            <div>
+              <label for="updateLocationCity" class="block text-sm font-medium text-gray-700 mb-2">
+                City *
+              </label>
+              <input 
+                type="text" 
+                id="updateLocationCity" 
+                name="updateLocationCity" 
+                required
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200 outline-none">
+            </div>
+          </div>
+
+          <div>
+            <label for="updateLocationState" class="block text-sm font-medium text-gray-700 mb-2">
+              State *
+            </label>
+            <select 
+              id="updateLocationState" 
+              name="updateLocationState" 
+              required
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200 outline-none bg-white">
+              <option value="Berlin">Berlin</option>
+              <option value="Brandenburg">Brandenburg</option>
+            </select>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label for="updateLocationLat" class="block text-sm font-medium text-gray-700 mb-2">
+                Latitude
+              </label>
+              <input 
+                type="text" 
+                id="updateLocationLat" 
+                name="updateLocationLat" 
+                readonly
+                class="w-full px-4 py-3 border border-gray-200 rounded-lg bg-gray-50 text-gray-600 cursor-not-allowed">
+            </div>
+
+            <div>
+              <label for="updateLocationLon" class="block text-sm font-medium text-gray-700 mb-2">
+                Longitude
+              </label>
+              <input 
+                type="text" 
+                id="updateLocationLon" 
+                name="updateLocationLon" 
+                readonly
+                class="w-full px-4 py-3 border border-gray-200 rounded-lg bg-gray-50 text-gray-600 cursor-not-allowed">
+            </div>
+          </div>
+
+          <div class="flex gap-3 pt-4">
+            <button 
+              id="updateBtn" 
+              class="admin-only flex-1 bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold py-3 rounded-lg hover:from-green-600 hover:to-green-700 transform transition duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 shadow-lg" 
+              type="button" 
+              onclick="handleUpdateLocation()" 
+              style="display: none;">
+               Update
+            </button>
+
+            <button 
+              id="deleteBtn" 
+              class="admin-only flex-1 bg-gradient-to-r from-red-500 to-red-600 text-white font-semibold py-3 rounded-lg hover:from-red-600 hover:to-red-700 transform transition duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 shadow-lg" 
+              type="button" 
+              onclick="handleDeleteLocation()" 
+              style="display: none;">
+               Delete
+            </button>
+
+            <button 
+              type="button" 
+              onclick="cancelUpdateDelete()" 
+              class="flex-1 bg-gray-500 text-white font-semibold py-3 rounded-lg hover:bg-gray-600 transform transition duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 shadow-lg">
+               Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-gray-200 text-center">
     <p>Impressum | Datenschutzerklärung</p>
   </footer>
-</section>
-
-
-
-<section id="mainAdmina" style="display: none;">
-  <h2>Welcome to our MapBerlin, Admin!</h2>
-  <div id="locations" >
-    <h3>Locations</h3>
-    <div style="display: flex">
-      <ul id="locationLinks" style="margin-right:20% ">
-        <li><a href="#" onclick="showUpdateDelete('hermannplatz')">hermannplatz</a></li>
-        <li><a href="#" onclick="showUpdateDelete('alexanderplatz')">alexanderplatz</a></li>
-        <li><a href="#" onclick="showUpdateDelete('zoologischergarten')">zoologischergarten</a></li>
-      </ul>
-      <iframe src="https://www.google.com/maps/d/embed?mid=1XsqqUhlRcele-VuAXH57a35ZtA0x9gU&ehbc=2E312F" width="640" height="480"></iframe>
-
-    </div>
-    <button id="addBtn1" onclick="openAddLocation()">Add</button>
-    <button onclick="logout()" >Logout</button>
-  </div>
-
-  <footer>
-    <p>Impressum | Datenschutzerklärung</p>
-  </footer>
-</section>
-
-
-<section id="mainNormal" style="display: none;">
-  <h2>Welcome to our MapBerlin, Normalo</h2>
-  <div id="locations1" >
-    <h3>Locations</h3>
-    <div style="display: flex">
-      <ul  style="margin-right:20% ">
-        <li ><a href="#" onclick="showUpdateDelete('hermannplatz')">hermannplatz</a></li>
-        <li><a href="#" onclick="showUpdateDelete('alexanderplatz')">alexanderplatz</a></li>
-        <li><a href="#" onclick="showUpdateDelete('zoologischergarten')">zoologischergarten</a></li>
-      </ul>
-      <iframe src="https://www.google.com/maps/d/embed?mid=1XsqqUhlRcele-VuAXH57a35ZtA0x9gU&ehbc=2E312F" width="640" height="480"></iframe>
-    </div>
-    <button onclick="logout()" >Logout</button>
-  </div>
-
-  <footer>
-    <p>Impressum | Datenschutzerklärung</p>
-  </footer>
-</section>
-
-
-
-<section id="add" style="display: none;">
-  <h2>Add Location</h2>
-  <form >
-    <label for="locationName">Name *</label>
-    <input type="text" id="locationName" name="locationName" required>
-
-    <label for="locationDescription">Description </label>
-    <input id="locationDescription" name="locationDescription">
-
-    <label for="locationStreet">Street *</label>
-    <input type="text" id="locationStreet" name="locationStreet" required>
-
-    <label for="locationZip">Zip *</label>
-    <input type="text" id="locationZip" name="locationZip" required>
-
-    <label for="locationCity">City *</label>
-    <input type="text" id="locationCity" name="locationCity" required>
-
-    <label for="locationState">State: Berlin or Brandenburg *</label>
-    <select id="locationState" name="locationState" required>
-      <option value="Berlin">Berlin</option>
-      <option value="Brandenburg">Brandenburg</option>
-    </select>
-
-    <label for="locationLat">Lat</label>
-    <input type="text" id="locationLat" name="locationLat">
-
-    <label for="locationLon">Lon</label>
-    <input type="text" id="locationLon" name="locationLon">
-
-    <button type="button" onclick="validateAddForm()">Save/Submit</button>
-    <button type="button" onclick="cancelAdd()">Cancel</button>
-  </form>
-  <footer>
-    <p>Impressum | Datenschutzerklärung</p>
-  </footer>
-</section>
-
-
-<section id="updateDelete">
-  <h2>Update/Delete Location</h2>
-  <form onsubmit="return validateUpdateDeleteForm()">
-    <label for="updateLocationName">Name *</label>
-    <input type="text" id="updateLocationName" name="updateLocationName"  required>
-
-    <label for="updateLocationDescription">Description</label>
-    <textarea id="updateLocationDescription" name="updateLocationDescription"></textarea>
-
-    <label for="updateLocationStreet">Street *</label>
-    <input type="text" id="updateLocationStreet" name="updateLocationStreet"  required>
-
-    <label for="updateLocationZip">Zip *</label>
-    <input type="text" id="updateLocationZip" name="updateLocationZip" required>
-
-    <label for="updateLocationCity">City *</label>
-    <input type="text" id="updateLocationCity" name="updateLocationCity" required>
-
-    <label for="updateLocationState">State: Berlin or Brandenburg *</label>
-    <select id="updateLocationState" name="updateLocationState" required>
-      <option value="Berlin" selected>Berlin</option>
-      <option value="Brandenburg">Brandenburg</option>
-    </select>
-
-    <label for="updateLocationLat">Lat</label>
-    <input type="text" id="updateLocationLat" name="updateLocationLat" >
-
-    <label for="updateLocationLon">Lon</label>
-    <input type="text" id="updateLocationLon" name="updateLocationLon" >
-
-    <button id="updateBtn" onclick="updateLocation()" type="button">Update</button>
-    <button id="deleteBtn" type="button" onclick="deleteLocation()">Delete</button>
-    <button type="button" onclick="cancelUpdateDelete()">Cancel</button>
-  </form>
-  <footer>
-    <p>Impressum | Datenschutzerklärung</p>
-  </footer>
-</section>
-
-
-
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="">
+    </script>
+  <script src="js/locations.js"></script>
+  <script src="js/map.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/uiBasedOnRole.js"></script>
 
 </body>
 </html>
